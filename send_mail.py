@@ -24,6 +24,7 @@ def send_mail():
     # Obtener las variables de entorno
     user_mail = os.getenv("USER_MAIL")
     password = os.getenv("PASSWORD")
+    port = int(os.getenv("FLASK_PORT", 5000))  # Lee el puerto desde la variable de entorno FLASK_PORT
 
     msg = MIMEMultipart()
     msg['From'] = user
@@ -31,7 +32,7 @@ def send_mail():
     msg['To'] = ', '.join(recipients)
     msg.attach(MIMEText(body))
 
-    with smtplib.SMTP('smtp.gmail.com', 587) as server:
+    with smtplib.SMTP('smtp.gmail.com', port) as server:  # Usa el puerto obtenido de la variable de entorno
         server.starttls()
         server.login(user_mail, password)
         
@@ -42,7 +43,5 @@ def send_mail():
     return jsonify({'message': 'Correo enviado con éxito'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=int(os.getenv("FLASK_PORT", 5000)))  # Usa el puerto obtenido de la variable de entorno FLASK_PORT
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5000, debug=True)
