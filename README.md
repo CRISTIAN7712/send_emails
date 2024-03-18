@@ -12,11 +12,12 @@ pip install -r requirements.txt
 2. Crea un archivo .env en el directorio raíz y configura las variables de entorno:
 USER_MAIL=nombre_usuario@gmail.com
 PASSWORD=tu_contraseña_de_aplicacion
+FLASK_PORT=puerto_de_tu_app
 
-3. Ejecuta la aplicación:
+4. Ejecuta la aplicación:
 python send_mail.py
 
-4. Uso
+5. Uso
 {
   "user": "nombre_usuario",
   "subject": "Asunto del correo",
